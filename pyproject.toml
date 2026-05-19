@@ -76,7 +76,8 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 # show short test summary info for all except passed
 # -s added to see print() output while debugging locally
-addopts = "-v --tb=short -s"
+# --no-header keeps output a bit cleaner in my terminal
+addopts = "-v --tb=short -s --no-header"
 
 [tool.ruff]
 line-length = 100
