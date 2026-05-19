@@ -74,6 +74,8 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+# show short test summary info for all except passed
+addopts = "-v --tb=short"
 
 [tool.ruff]
 line-length = 100
