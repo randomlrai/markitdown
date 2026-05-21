@@ -9,6 +9,7 @@ Personal fork notes:
 - Tracking upstream at microsoft/markitdown
 - Added StreamInfo to top-level exports for easier programmatic usage
 - Pinned __version__ to track local changes separately from upstream releases
+- Added __all__ export for UnsupportedFormatException for cleaner error handling
 """
 
 from markitdown._markitdown import MarkItDown, DocumentConverter, ConversionResult
@@ -36,3 +37,11 @@ except ImportError:
         "ConversionResult",
         "__version__",
     ]
+
+# Also expose UnsupportedFormatException if available, so callers can catch it
+# without digging into the private _markitdown module.
+try:
+    from markitdown._markitdown import UnsupportedFormatException
+    __all__ = __all__ + ["UnsupportedFormatException"]
+except ImportError:
+    pass
