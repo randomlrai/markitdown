@@ -4,6 +4,10 @@ This package provides tools to convert documents, spreadsheets, presentations,
 and other file formats into clean, readable Markdown text.
 
 Note: Forked from microsoft/markitdown for personal use and experimentation.
+
+Personal fork notes:
+- Tracking upstream at microsoft/markitdown
+- Added StreamInfo to top-level exports for easier programmatic usage
 """
 
 from markitdown._markitdown import MarkItDown, DocumentConverter, ConversionResult
