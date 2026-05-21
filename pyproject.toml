@@ -78,7 +78,8 @@ python_functions = ["test_*"]
 # -s added to see print() output while debugging locally
 # --no-header keeps output a bit cleaner in my terminal
 # removed -s from addopts; use `pytest -s` manually when needed to avoid noisy CI logs
-addopts = "-v --tb=short --no-header"
+# added -p no:warnings to suppress deprecation noise from third-party libs
+addopts = "-v --tb=short --no-header -p no:warnings"
 
 [tool.ruff]
 line-length = 100
