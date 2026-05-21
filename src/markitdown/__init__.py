@@ -10,6 +10,7 @@ Personal fork notes:
 - Added StreamInfo to top-level exports for easier programmatic usage
 - Pinned __version__ to track local changes separately from upstream releases
 - Added __all__ export for UnsupportedFormatException for cleaner error handling
+- Exposed FileConversionException at top level alongside UnsupportedFormatException
 """
 
 from markitdown._markitdown import MarkItDown, DocumentConverter, ConversionResult
@@ -43,5 +44,14 @@ except ImportError:
 try:
     from markitdown._markitdown import UnsupportedFormatException
     __all__ = __all__ + ["UnsupportedFormatException"]
+except ImportError:
+    pass
+
+# Expose FileConversionException for callers who want to catch conversion errors
+# separately from unsupported format errors. Useful when you want to distinguish
+# between "we don't support this format" vs "we tried but something went wrong".
+try:
+    from markitdown._markitdown import FileConversionException
+    __all__ = __all__ + ["FileConversionException"]
 except ImportError:
     pass
