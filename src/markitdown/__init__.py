@@ -11,6 +11,7 @@ Personal fork notes:
 - Pinned __version__ to track local changes separately from upstream releases
 - Added __all__ export for UnsupportedFormatException for cleaner error handling
 - Exposed FileConversionException at top level alongside UnsupportedFormatException
+- Re-exported all exception types under a single 'exceptions' tuple for convenience
 """
 
 from markitdown._markitdown import MarkItDown, DocumentConverter, ConversionResult
@@ -55,3 +56,11 @@ try:
     __all__ = __all__ + ["FileConversionException"]
 except ImportError:
     pass
+
+# Convenience tuple of all exception types exported by this package.
+# Handy for broad exception catching: `except markitdown.EXCEPTIONS as e:`
+# Personal note: I kept tripping over which exceptions to catch, so this helps.
+EXCEPTIONS = tuple(
+    obj for name in ["UnsupportedFormatException", "FileConversionException"]
+    if (obj := globals().get(name)) is not None
+)
