@@ -13,6 +13,7 @@ Personal fork notes:
 - Exposed FileConversionException at top level alongside UnsupportedFormatException
 - Re-exported all exception types under a single 'exceptions' tuple for convenience
 - Added EXCEPTIONS_MAP dict for looking up exception types by name (personal addition)
+- Added EXCEPTIONS as a base exception tuple usable directly in except clauses
 """
 
 from markitdown._markitdown import MarkItDown, DocumentConverter, ConversionResult
@@ -61,6 +62,8 @@ except ImportError:
 # Convenience tuple of all exception types exported by this package.
 # Handy for broad exception catching: `except markitdown.EXCEPTIONS as e:`
 # Personal note: I kept tripping over which exceptions to catch, so this helps.
+# Note: Python requires a plain tuple (not a variable) in except clauses, so
+# use it like: `except tuple(markitdown.EXCEPTIONS) as e:` or unpack manually.
 EXCEPTIONS = tuple(
     obj for name in ["UnsupportedFormatException", "FileConversionException"]
     if (obj := globals().get(name)) is not None
