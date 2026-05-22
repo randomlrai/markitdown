@@ -12,6 +12,7 @@ Personal fork notes:
 - Added __all__ export for UnsupportedFormatException for cleaner error handling
 - Exposed FileConversionException at top level alongside UnsupportedFormatException
 - Re-exported all exception types under a single 'exceptions' tuple for convenience
+- Added EXCEPTIONS_MAP dict for looking up exception types by name (personal addition)
 """
 
 from markitdown._markitdown import MarkItDown, DocumentConverter, ConversionResult
@@ -64,3 +65,12 @@ EXCEPTIONS = tuple(
     obj for name in ["UnsupportedFormatException", "FileConversionException"]
     if (obj := globals().get(name)) is not None
 )
+
+# Convenience dict mapping exception name -> exception class.
+# Personal note: useful when I want to reference an exception type by string,
+# e.g. in config-driven error handling or logging utilities.
+EXCEPTIONS_MAP = {
+    name: globals()[name]
+    for name in ["UnsupportedFormatException", "FileConversionException"]
+    if name in globals()
+}
