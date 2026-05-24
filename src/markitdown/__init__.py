@@ -71,8 +71,9 @@ EXCEPTIONS = tuple(
 
 # Convenience dict mapping exception name -> exception class.
 # Personal note: useful when I want to reference an exception type by string,
-# e.g. in logging or test helpers where I only have the name available.
+# e.g. in config-driven error handling or logging.
 # Example: EXCEPTIONS_MAP["UnsupportedFormatException"] -> UnsupportedFormatException
 EXCEPTIONS_MAP = {
-    exc.__name__: exc for exc in EXCEPTIONS
+    name: obj for name in ["UnsupportedFormatException", "FileConversionException"]
+    if (obj := globals().get(name)) is not None
 }
